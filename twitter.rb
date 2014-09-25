@@ -25,33 +25,25 @@ post '/' do
     #ultimos_t = client.user_timeline(@name,{:count=>@number.to_i})
     #@todo_tweet =(@todo_tweet != '') ? ultimos_t.map{ |i| i.text} : ''
 
-    i = 0
-    procesados = 0
     @usuario = Hash.new
-    amigos = Twitter.friend_ids(@name)
-    amigos.ids.each do |aid|
-    i = i + 1
-
-    if (i <= @number) 
-      f = Twitter.user(aid)
+    amigos = client.friend_ids(@name)
+    amigos.each do |amigote|
+      f = client.user(amigote)
       # Solo iteramos si no es un usuario protegido
       begin
       if (f.protected.to_s != "true")
          @usuario[f.screen_name.to_s] = f.followers_count
-         procesados = procesados + 1
+	 puts "#{f.screen_name.to_s} tiene #{f.followers_count} followers"
       end
       rescue
          puts "Se ha producido un error por favor intentelo de nuevo"
       end
-   end
+
 end
 
 
-
-
-
-
   end
+
   erb :twitter
 end
 

@@ -84,7 +84,8 @@
  		
  		<div id="izquierda">
 			<% if @name == ''%>
-				<p id="warning"> No se ha introducido usuario o es incorrecto </p>
+				<p id="warning"> No se ha introducido 
+rrecto </p>
 			<%else%>
         <p><b> Usuario <i><%= @name %></i></b></p>
 			<%end %>
@@ -92,24 +93,18 @@
 			<% if @name != ''%>
 				<%if @number>10%>
 					<p id="warning"> Sólo se puede mostrar hasta 10 usuarios </p>
-				<%elsif @todo_tweet.length <= 0 %>
-					<p id="warning">El usuario no existe o no tiene tweets</p>
-				<%elsif @todo_tweet.length < @number %>
-					<p id="warning">El usuario tiene menos de <%= @number%> tweets</p>
-					<ol>
-						<% @todo_tweet.each do |i| %> 
-							<li id="col"><%= i %><br></li>
-						<% end %>
-					</ol>
+				
 				<%else%>
 					<p>Amigos más populares :</p>
 					<ol>
-						<% @usuario.sort_by {|k,v| -v}.each {|usuario, cuenta| %><li id="col"><% "#{usuario}, #{cuenta}" } %>
-
-
-						<% #@todo_tweet.each do |i| %> 
-							<!--<li id="col"><%= i %><br></li>-->
-						<% #end %>
+						<% total = 0 %>
+						<% @usuario.sort_by {|k,v| -v}.each {|usuario, cuenta| %>
+						<% if total < @number %>
+							<li id="col"><%= usuario %>: <%= cuenta %></li>
+							<% total = total + 1 %>
+						<% end %>
+						<% } %>
+							
 					</ol>
 				<%end%>
 			<%end%>
