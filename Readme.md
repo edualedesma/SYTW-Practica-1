@@ -11,11 +11,6 @@
 
  Accederemos a Twitter en una aplicación Sinatra y mostraremos los amigos más populares de un usuario obtenidos desde un formulario.
 
-
-##Objetivo
-
-Accedemos a Twitter en una aplicación Sinatra que muestre en una página los últimos twitts de una lista de usuarios obtenidos desde un formulario.
-
 ##Instalación
 
 1. Instalaremos las gemas necesarias: `bundle install`
