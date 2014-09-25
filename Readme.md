@@ -10,6 +10,7 @@
 ##Instalación
 
 1. Instalaremos las gemas necesarias: `bundle install`
+
 2. Configuraremos el fichero `configure.rb` siguiendo las directrices del fichero `configure.rb.example`
 
 ##Ejecución
