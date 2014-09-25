@@ -22,28 +22,23 @@ post '/' do
   @number = params[:n].to_i
   @number = 1 if @number <= 0
   if client.user? @name 
-    #ultimos_t = client.user_timeline(@name,{:count=>@number.to_i})
-    #@todo_tweet =(@todo_tweet != '') ? ultimos_t.map{ |i| i.text} : ''
-
     @usuario = Hash.new
-    amigos = client.friend_ids(@name)
+    # Get de number of users specified by @number variable.
+    if @number < 10
+      amigos = client.friend_ids(@name).take(@number)
+    else
+      amigos = client.friend_ids(@name).take(5)
+    end
     amigos.each do |amigote|
-      f = client.user(amigote)
+      fo = client.user(amigote)
       # Solo iteramos si no es un usuario protegido
       begin
-      if (f.protected.to_s != "true")
-         @usuario[f.screen_name.to_s] = f.followers_count
-	 puts "#{f.screen_name.to_s} tiene #{f.followers_count} followers"
+        if (fo.protected.to_s != "true")
+          @usuario[fo.screen_name.to_s] = fo.followers_count  # Le asigno el número de seguidores
+        end
       end
-      rescue
-         puts "Se ha producido un error por favor intentelo de nuevo"
-      end
-
-end
-
-
+    end
   end
-
   erb :twitter
 end
 
