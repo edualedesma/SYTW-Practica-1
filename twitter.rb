@@ -23,22 +23,22 @@ post '/' do
   @number = 1 if @number <= 0
   if client.user? @name 
     @usuario = Hash.new
-    # Get de number of users specified by @number variable.
+
+    # Get the id-users specified by @number variable
     if @number < 10
       amigos = client.friend_ids(@name).take(@number)
     else
       amigos = client.friend_ids(@name).take(5)
     end
-    amigos.each do |amigote|
-      fo = client.user(amigote)
-      # Solo iteramos si no es un usuario protegido
-      begin
-        if (fo.protected.to_s != "true")
-          @usuario[fo.screen_name.to_s] = fo.followers_count  # Le asigno el número de seguidores
-        end
+
+    # Get user from id in amigo and assign the number of followers
+    amigos.each do |amigo|
+      fo = client.user(amigo)
+      # Only iterate if not a protected user
+      if (fo.protected.to_s != "true")
+        @usuario[fo.screen_name.to_s] = fo.followers_count
       end
     end
   end
   erb :twitter
 end
-

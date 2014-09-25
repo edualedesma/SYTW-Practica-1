@@ -2,48 +2,46 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href="public/styles.css" rel="stylesheet" type="text/css">
-		<title>Rack::Response</title>
+		<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+		<title>Amigos más pupulares en Twitter - Con Sinatra</title>
 	</head>
 	<body>
 		<div id="cabecera">
 	 			<p><img src="/bird_icon.png" WIDTH=100 HEIGHT=100 />
 	 			<b>Amigos más Populares</b></p>
+	 			<h5>Por <a href="https://github.com/alu3286/SYTW-Practica-1">Eduardo Javier Acuña Ledesma</a></h5>
+	 			
 	 	</div>
 	 	
 	 	<div id="re">
 		 	<form action="/" method="post">
 		   		<p><b>Introduzca su nombre en Twitter: </b></p><input type="text" name="firstname"  value="" autofocus>
-		   		<p><b>¿Cuántos amigos desea ver? </b></p><input type="text" name="n" value="1">
-		   		<input  type="submit" value="Submit" >
+		   		<p><b>¿Cuántos amigos desea ver? (máximo 10)</b></p><input type="text" name="n" value="1">
+		   		<input type="submit" value="Obtener" >
 		 	</form>
 	 	</div>
  		
  		<div id="izquierda">
 			<% if @name == ''%>
-				<p id="warning"> No se ha introducido usuario o es incorrecto </p>
+				<p id="warning"> No se ha introducido un nombre o es incorrecto </p>
 			<%else%>
         <p><b> Usuario <i><%= @name %></i></b></p>
 			<%end %>
 
 			<% if @name != ''%>
 				<%if @number>10%>
-					<p id="warning"> Sólo se puede mostrar hasta 10 usuarios </p>
+					<p id="warning"> Sólo se pueden mostrar hasta 10 amigos </p>
 				
 				<%else%>
-					<p>Amigos más populares :</p>
+					<p>Amigos más populares:</p>
 					<ol>
-						<% #total = 0 %>
 						<% @usuario.sort_by {|k,v| -v}.each {|usuario, cuenta| %>
-						<% #if total < @number %>
 							<li id="col"><%= usuario %>: <%= cuenta %></li>
-							<% #total = total + 1 %>
-						<% #end %>
 						<% } %>
 							
 					</ol>
 				<%end%>
 			<%end%>
-		</div>	
+		</div>
 	</body>
 </html>
