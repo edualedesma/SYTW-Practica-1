@@ -16,7 +16,10 @@
 ##Ejecución
 
 Podemos ejecutarlo así:
+
 1. `ruby twitter.rb`
+
+
 2. Iremos a [http://localhost:4567/](http://localhost:4567/) para poder usar la aplicación.
 
 *Sistemas y Tecnologías Web - Eduardo Javier Acuña Ledesma*
